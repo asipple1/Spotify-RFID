@@ -115,7 +115,7 @@
 
   // Set token
   let _token = hash.access_token;
-  // let _token = 'BQCTzmAmOJvdSOXfvUhn1oSQFm5-p8CwoWurCfk9wprpyoEZktkyMIs5kHcWEn7r4UbgVxZNtdE2F1lMygAh4pa9LZqfliF1wD9YNZ-9qwiHDMQnBJMBsrREItXkb-Kgv0Rc0KvqFW2jEU-tplas78_f4EeXIl5p9A';
+  // let _token = 'BQC0LWRqZ6n_T53J2HJq-0mWHmVjGEBwpjsqeitg8U9kXyztIdpVoUX5SuGGQbHK1kme8FP2qExU7HC2VEKtgGlG44YQspxsC63kkNeI3_iT5FbI_LWUXNJ7-W_nETov6qAt3TvV2crMus0RNTDbqJZ5EKnfzLNDVw';
   console.log(_token);
 
   const authEndpoint = "https://accounts.spotify.com/authorize";
@@ -248,6 +248,11 @@
           this.album = songData.album.name;
           this.song = songData.name;
           this.albumImgUrl = songData.album.images[0].url;
+          // Play a random song if paused
+          if(state.paused) {
+            let randomSong = this.pickRandomProperty(this.rfidArray).song;
+            this.play(randomSong);
+          }
         });
 
         // Wait for the player to connect
@@ -265,6 +270,10 @@
       checkEnter: function(val) {
         this.songId = val.target.value;
         this.play(this.songId);
+      },
+      pickRandomProperty: function(obj) {
+        var keys = Object.keys(obj)
+        return obj[keys[ keys.length * Math.random() << 0]];
       }
     }
   };

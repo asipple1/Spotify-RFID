@@ -1,5 +1,8 @@
 # spotify-rfid
 
+### Deploy to surge.sh
+- surge --domain https://tangy-station.surge.sh
+
 > Play a song assocated to the RFID tag scanned
 
 ## Build Setup
